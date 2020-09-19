@@ -5,7 +5,14 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['react-app', 'plugin:jsx-a11y/recommended', 'prettier', 'prettier/react', 'prettier/@typescript-eslint'],
+  extends: [
+    'react-app',
+    'plugin:jsx-a11y/recommended',
+    'prettier',
+    'prettier/react',
+    'prettier/@typescript-eslint',
+    'plugin:mdx/recommended',
+  ],
   ignorePatterns: ['src/serviceWorker.ts'],
   plugins: ['jsx-a11y', 'react-hooks'],
   parserOptions: {
