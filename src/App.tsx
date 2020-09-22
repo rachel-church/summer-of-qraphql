@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DogToy, DogToyCollection } from './schema';
+import { useQuery, gql } from '@apollo/client';
 
 import './App.css';
 
@@ -12,7 +13,9 @@ const {
 
 const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}/environments/${ENVIRONMENT}`;
 
-const GET_TOYS_QUERY = `
+// `gql` is a template literal tag that parses GraphQL query strings into the standard GraphQL AST (abstract syntax tree).
+// Allows Apollo to be smarter because it can traverse the query to perform validation and optimizations.
+const GET_TOYS_QUERY = gql`
   query {
     dogToyCollection {
       items {
@@ -33,41 +36,10 @@ type DogToyResponse = {
 }
 
 const App = () => {
-  const [{ data, loading, error }, setDogToyState] = React.useState<
-    { data?: DogToyResponse; loading?: boolean; error?: unknown } // Inlined type representing the data saved in the state variable
-  >({
-    data: undefined,
-    loading: true,
-    error: undefined,
-  });
+  const { loading, error, data } = useQuery<DogToyResponse>(GET_TOYS_QUERY);
 
   // Use optional chaining to retrieve the nested items array OR default to an empty array
   const allToys = (data?.dogToyCollection?.items || []) as DogToy[];
-
-  // Fetch all dog toys from Contentful on page load
-  useEffect(() => {
-    // Set the loading flag to true and clear loading and error flags
-    setDogToyState({ data: undefined, loading: true, error: undefined });
-
-    // Fetch the data from Contentful
-    fetch(
-      CONTENTFUL_GRAPHQL_ENDPOINT,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query: GET_TOYS_QUERY }),
-      },
-    )
-      .then((res) => res.json())
-      .then(({ data }) => {
-        console.log('Received response from Contentful', data);
-        setDogToyState({ data, loading: false, error: undefined })
-      })
-      .catch((err) => setDogToyState({ data: undefined, loading: false, error: err }))
-  }, []);
 
   if (error) {
     console.error(error);
