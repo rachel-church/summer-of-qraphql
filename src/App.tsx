@@ -23,8 +23,29 @@ const GET_TOYS_QUERY = `
   }
 `
 
+/**
+ * TS type representing a single DogToy entry with just the fields we are requesting in our above graphQL query
+ */
+type DogToy = {
+  sys: { id: string };
+  toyName: string;
+  estimatedPrice: number;
+  toyPhoto: { url: string };
+};
+
+/**
+ * TS type mirroring the structure of our graphQL query
+ */
+type DogToyCollection = {
+  dogToyCollection: {
+    items: DogToy[];
+  }
+}
+
 const App = () => {
-  const [{ data, loading, error }, setDogToyState] = React.useState({
+  const [{ data, loading, error }, setDogToyState] = React.useState<
+    { data?: DogToyCollection; loading?: boolean; error?: unknown } // Inlined type representing the data saved in the state variable
+  >({
     data: undefined,
     loading: true,
     error: undefined,
