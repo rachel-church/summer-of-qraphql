@@ -1,6 +1,5 @@
 import React from 'react';
 import { DogToy, useGetToysUnderPriceQuery } from './schema';
-import { gql } from '@apollo/client';
 
 import './App.css';
 
@@ -12,21 +11,6 @@ const {
 } = process.env;
 
 const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}/environments/${ENVIRONMENT}`;
-
-// `gql` is a template literal tag that parses GraphQL query strings into the standard GraphQL AST (abstract syntax tree).
-// Allows Apollo to be smarter because it can traverse the query to perform validation and optimizations.
-gql`
-  query getToysUnderPrice ($maxPrice: Float) {
-    dogToyCollection(where: {estimatedPrice_lt: $maxPrice}) {
-      items {
-        sys { id }
-        toyName
-        estimatedPrice
-        toyPhoto { url }
-      }
-    }
-  }
-`
 
 const App = () => {
   const { loading, error, data } = useGetToysUnderPriceQuery({
