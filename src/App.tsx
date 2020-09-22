@@ -16,13 +16,13 @@ const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/s
 // `gql` is a template literal tag that parses GraphQL query strings into the standard GraphQL AST (abstract syntax tree).
 // Allows Apollo to be smarter because it can traverse the query to perform validation and optimizations.
 const GET_TOYS_QUERY = gql`
-  query {
-    dogToyCollection {
+  query ($maxPrice: Float) {
+    dogToyCollection(where: {estimatedPrice_lt: $maxPrice}) {
       items {
-        sys { id },
-        toyName,
-        estimatedPrice,
-        toyPhoto { url },
+        sys { id }
+        toyName
+        estimatedPrice
+        toyPhoto { url }
       }
     }
   }
@@ -35,8 +35,16 @@ type DogToyResponse = {
   dogToyCollection: DogToyCollection
 }
 
+type DogToyVariables = {
+  maxPrice: number
+}
+
 const App = () => {
-  const { loading, error, data } = useQuery<DogToyResponse>(GET_TOYS_QUERY);
+  const { loading, error, data } = useQuery<DogToyResponse, DogToyVariables>(GET_TOYS_QUERY, {
+    variables: {
+      maxPrice: 20
+    }
+  });
 
   // Use optional chaining to retrieve the nested items array OR default to an empty array
   const allToys = (data?.dogToyCollection?.items || []) as DogToy[];
