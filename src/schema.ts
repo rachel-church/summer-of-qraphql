@@ -449,3 +449,26 @@ export enum DogToyOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
+
+export type GetToysUnderPriceQueryVariables = Exact<{
+  maxPrice?: Maybe<Scalars['Float']>;
+}>;
+
+
+export type GetToysUnderPriceQuery = (
+  { __typename?: 'Query' }
+  & { dogToyCollection?: Maybe<(
+    { __typename?: 'DogToyCollection' }
+    & { items: Array<Maybe<(
+      { __typename?: 'DogToy' }
+      & Pick<DogToy, 'toyName' | 'estimatedPrice'>
+      & { sys: (
+        { __typename?: 'Sys' }
+        & Pick<Sys, 'id'>
+      ), toyPhoto?: Maybe<(
+        { __typename?: 'Asset' }
+        & Pick<Asset, 'url'>
+      )> }
+    )>> }
+  )> }
+);

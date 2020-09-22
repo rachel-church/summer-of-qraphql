@@ -1,5 +1,5 @@
 import React from 'react';
-import { DogToy, DogToyCollection } from './schema';
+import { DogToy, GetToysUnderPriceQuery, GetToysUnderPriceQueryVariables } from './schema';
 import { useQuery, gql } from '@apollo/client';
 
 import './App.css';
@@ -16,7 +16,7 @@ const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/s
 // `gql` is a template literal tag that parses GraphQL query strings into the standard GraphQL AST (abstract syntax tree).
 // Allows Apollo to be smarter because it can traverse the query to perform validation and optimizations.
 const GET_TOYS_QUERY = gql`
-  query ($maxPrice: Float) {
+  query getToysUnderPrice ($maxPrice: Float) {
     dogToyCollection(where: {estimatedPrice_lt: $maxPrice}) {
       items {
         sys { id }
@@ -28,19 +28,8 @@ const GET_TOYS_QUERY = gql`
   }
 `
 
-/**
- * TS type mirroring the structure of our graphQL query
- */
-type DogToyResponse = {
-  dogToyCollection: DogToyCollection
-}
-
-type DogToyVariables = {
-  maxPrice: number
-}
-
 const App = () => {
-  const { loading, error, data } = useQuery<DogToyResponse, DogToyVariables>(GET_TOYS_QUERY, {
+  const { loading, error, data } = useQuery<GetToysUnderPriceQuery, GetToysUnderPriceQueryVariables>(GET_TOYS_QUERY, {
     variables: {
       maxPrice: 20
     }
