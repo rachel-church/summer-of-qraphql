@@ -5,7 +5,8 @@ schema:
         Authorization: "Bearer ${REACT_APP_CONTENTFUL_API_KEY}"
 documents: "src/**/!(*.d).{ts,tsx}"
 generates:
-  src/schema.ts:
+  src/schema.tsx:
     plugins:
       - typescript
       - typescript-operations
+      - typescript-react-apollo

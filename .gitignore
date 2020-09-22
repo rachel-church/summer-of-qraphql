@@ -48,4 +48,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # auto-generated files
-src/schema.ts
+src/schema.tsx
