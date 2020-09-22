@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { DogToyCollection } from './schema';
+
 import './App.css';
 
 // Utilize the environment variables defined in the `.env` file
@@ -24,27 +26,15 @@ const GET_TOYS_QUERY = `
 `
 
 /**
- * TS type representing a single DogToy entry with just the fields we are requesting in our above graphQL query
- */
-type DogToy = {
-  sys: { id: string };
-  toyName: string;
-  estimatedPrice: number;
-  toyPhoto: { url: string };
-};
-
-/**
  * TS type mirroring the structure of our graphQL query
  */
-type DogToyCollection = {
-  dogToyCollection: {
-    items: DogToy[];
-  }
+type DogToyResponse = {
+  dogToyCollection: DogToyCollection
 }
 
 const App = () => {
   const [{ data, loading, error }, setDogToyState] = React.useState<
-    { data?: DogToyCollection; loading?: boolean; error?: unknown } // Inlined type representing the data saved in the state variable
+    { data?: DogToyResponse; loading?: boolean; error?: unknown } // Inlined type representing the data saved in the state variable
   >({
     data: undefined,
     loading: true,
@@ -94,12 +84,12 @@ const App = () => {
         <h1>Welcome! These are Cowboy's toys</h1>
         <ul className="productList">
           {allToys.map((toy) =>
-            <li key={toy.sys.id} id={toy.sys.id} className="productCard">
+            <li key={toy!.sys.id} id={toy!.sys.id} className="productCard">
               <h2>
-                <span>{toy.toyName}</span>
-                <span>${toy.estimatedPrice}</span>
+                <span>{toy!.toyName}</span>
+                <span>${toy!.estimatedPrice}</span>
               </h2>
-              <img src={toy.toyPhoto.url} alt=""/>
+              <img src={toy!.toyPhoto?.url || ''} alt=""/>
             </li>,
           )}
         </ul>
