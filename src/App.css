@@ -1,34 +1,93 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.app {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 0 8px;
+  text-align: center;
 }
 
-.App-link {
+a {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.container {
+  margin: 18px auto;
+  max-width: 100%;
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+
+.productList {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 18px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .productList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .productList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.productCard {
+  background-color: #fff;
+  color: #282c34;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 2px 16px 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.productCard > img {
+  border-radius: 0 0 5px 5px;
+  max-height: 300px;
+  max-width: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.productCard > h2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loader {
+  height: 20vmin;
+  width: 20vmin;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  margin: 10% auto 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loader {
+    animation: spin infinite 0.75s linear;
+  }
+}
+
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
