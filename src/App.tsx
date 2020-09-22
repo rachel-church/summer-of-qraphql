@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { DogToyCollection } from './schema';
+import { DogToy, DogToyCollection } from './schema';
 
 import './App.css';
 
@@ -42,7 +42,7 @@ const App = () => {
   });
 
   // Use optional chaining to retrieve the nested items array OR default to an empty array
-  const allToys = data?.dogToyCollection?.items || [];
+  const allToys = (data?.dogToyCollection?.items || []) as DogToy[];
 
   // Fetch all dog toys from Contentful on page load
   useEffect(() => {
@@ -84,12 +84,12 @@ const App = () => {
         <h1>Welcome! These are Cowboy's toys</h1>
         <ul className="productList">
           {allToys.map((toy) =>
-            <li key={toy!.sys.id} id={toy!.sys.id} className="productCard">
+            <li key={toy.sys.id} id={toy.sys.id} className="productCard">
               <h2>
-                <span>{toy!.toyName}</span>
-                <span>${toy!.estimatedPrice}</span>
+                <span>{toy.toyName}</span>
+                <span>${toy.estimatedPrice}</span>
               </h2>
-              <img src={toy!.toyPhoto?.url || ''} alt=""/>
+              {toy.toyPhoto?.url && <img src={toy.toyPhoto.url} alt=""/>}
             </li>,
           )}
         </ul>
