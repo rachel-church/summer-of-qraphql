@@ -11,6 +11,41 @@
   text-align: center;
 }
 
+.priceFilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.dollarInputWrapper {
+  margin-left: .5em;
+  border: 1px solid grey;
+  border-radius: 5px;
+  display: flex;
+}
+
+.dollarInputWrapper > .dollarSign,
+.dollarInputWrapper > input {
+  background-color: white;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  padding: 10px;
+  border: 0;
+}
+
+.dollarInputWrapper > input {
+  border-radius: 0 5px 5px 0;
+  padding-left: 2px;
+  outline: 0;
+}
+
+.dollarInputWrapper > .dollarSign {
+  border-radius: 5px 0 0 5px;
+  padding-right: 2px;
+  color: black;
+}
+
 a {
   color: #61dafb;
 }

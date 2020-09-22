@@ -49,3 +49,5 @@ yarn-error.log*
 
 # auto-generated files
 src/schema.tsx
+src/introspection-result.ts
+schema.graphql

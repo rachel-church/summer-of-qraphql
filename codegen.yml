@@ -8,7 +8,39 @@ documents:
   - "src/**/*.graphql"
 generates:
   src/schema.tsx:
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
+      - add:
+          content: '/* eslint-disable */ // THIS IS A GENERATED FILE. Do not edit manually.'
+    config:
+      gqlImport: graphql.macro#gql # parse the queries at build time and inline the parsing results
+      defaultMapper: unknown
+      enumsAsTypes: true
+      noSchemaStitching: true
+      optional: false
+      avoidOptionals: true
+      immutableTypes: true
+
+  # improve performance of Apollo cache. Read more at https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
+  src/introspection-result.ts:
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    plugins:
+      - fragment-matcher
+      - add:
+          content: '/* eslint-disable */ // THIS IS A GENERATED FILE. Do not edit manually.'
+    config:
+      apolloClientVersion: 3
+
+  #  Save the remote ast schema to a file for a better IDE experience
+  schema.graphql:
+    plugins:
+      - schema-ast
+      - add:
+          content: '# THIS IS A GENERATED FILE. Do not edit manually.'
