@@ -48,6 +48,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # auto-generated files
-src/schema.tsx
+src/schema.ts
 src/introspection-result.ts
 schema.graphql
