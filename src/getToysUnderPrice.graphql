@@ -1,10 +1,10 @@
 query getToysUnderPrice ($maxPrice: Float) {
-    dogToyCollection(where: {estimatedPrice_lt: $maxPrice}) {
-        items {
-            sys { id }
-            toyName
-            estimatedPrice
-            toyPhoto { url }
-        }
+  dogToyCollection(where: {estimatedPrice_lt: $maxPrice}) {
+    items {
+      sys { id }
+      toyName
+      estimatedPrice
+      toyPhoto { url }
     }
+  }
 }
