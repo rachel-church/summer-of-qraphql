@@ -49,3 +49,4 @@ yarn-error.log*
 
 # auto-generated files
 src/schema.tsx
+schema.graphql

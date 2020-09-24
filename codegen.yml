@@ -12,3 +12,8 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-apollo
+
+  # Save the remote ast schema to a file for a better IDE experience
+  schema.graphql:
+    plugins:
+      - schema-ast
