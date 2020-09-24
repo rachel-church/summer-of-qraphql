@@ -2,7 +2,7 @@
 
 This repo is meant to be complimentary to Rachel Church's ["Auto-generating Typescript for your content model" livestream](https://www.youtube.com/watch?v=vU6G7cIaNqE&feature=youtu.be&ab_channel=Contentful)  from September 25, 2020.
 
-The slide-deck can be viewed at <https://rachel-church.github.io/summer-of-graphql-mdx-slides/>.
+The slide-deck can be viewed at <https://summer-of-graphql-mdx-slides.netlify.app/> and the source code for the mdx-slides lives at <https://github.com/rachel-church/summer-of-graphql-mdx-slides>.
 
 The talk is a part of Contentful's ["Summer of GraphQL"](https://www.contentful.com/blog/2020/08/07/its-the-summer-of-graphql-livestreams-contentful/) livestream series and utilizes the sample Contentful space from the ["Getting started with Contentful and GraphQL"](https://www.contentful.com/blog/2020/09/16/getting-started-with-contentful-and-graphql/) blog.
 
